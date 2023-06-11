@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RatingScreen"
+    android:id="@+id/ratelayout">
+
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/baseline_arrow_back_ios_new_24"
+        android:text="press"
+        app:backgroundTint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/mainBackground"
+        app:layout_constraintTop_toTopOf="@+id/image" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/mainBackground"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="310dp"
+        android:backgroundTint="@color/grey"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/helpfulnessTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="sans-serif"
+                android:text="Helpfulness"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/examTxt"
+                app:layout_constraintTop_toBottomOf="@+id/examTxt" />
+
+            <TextView
+                android:id="@+id/examTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="sans-serif"
+                android:text="Exams"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="@+id/practicalLabTxt"
+                app:layout_constraintTop_toBottomOf="@+id/practicalLabTxt" />
+
+            <TextView
+                android:id="@+id/practicalLabTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:fontFamily="sans-serif"
+                android:text="Practical Lab"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/lectureTxt"
+                app:layout_constraintTop_toBottomOf="@+id/lectureTxt" />
+
+            <TextView
+                android:id="@+id/lectureTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif"
+                android:text="Lecture"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ratingBar"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+            <RatingBar
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lectureStar"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintBottom_toBottomOf="@+id/lectureTxt"
+                app:layout_constraintStart_toEndOf="@+id/lectureTxt"
+                app:layout_constraintTop_toTopOf="@+id/lectureTxt"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:numStars="5"
+                android:stepSize="1">
+
+            </RatingBar>
+
+            <RatingBar
+                android:id="@+id/practicalLabStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintEnd_toEndOf="@+id/lectureStar"
+                app:layout_constraintStart_toStartOf="@+id/lectureStar"
+                app:layout_constraintTop_toBottomOf="@+id/lectureStar"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:numStars="5"
+                android:stepSize="1"/>
+
+            <RatingBar
+                android:id="@+id/examsStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintEnd_toEndOf="@+id/practicalLabStar"
+                app:layout_constraintStart_toStartOf="@+id/practicalLabStar"
+                app:layout_constraintTop_toBottomOf="@+id/practicalLabStar"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:numStars="5"
+                android:stepSize="1"
+
+                />
+
+            <RatingBar
+                android:id="@+id/helpfulnessStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:layout_constraintEnd_toEndOf="@+id/examsStar"
+                app:layout_constraintStart_toStartOf="@+id/examsStar"
+                app:layout_constraintTop_toBottomOf="@+id/examsStar"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:numStars="5"
+                android:stepSize="1"
+                >
+            </RatingBar>
+
+            <TextView
+                android:id="@+id/nameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="90dp"
+                android:fontFamily="sans-serif"
+                android:text="Dr. Benjamin Meyer"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ratingAndReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif"
+                android:text="Ratings and Reviews"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/nameTxt"
+                app:layout_constraintStart_toStartOf="@+id/nameTxt"
+                app:layout_constraintTop_toBottomOf="@+id/nameTxt"/>
+
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:numStars="5"
+                app:layout_constraintTop_toBottomOf="@+id/ratingAndReview"
+                tools:ignore="SpeakableTextPresentCheck"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/rateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/lightblue"
+        android:text="Rate"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mainBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainBackground"
+        app:layout_constraintStart_toStartOf="@+id/mainBackground"
+        app:layout_constraintTop_toBottomOf="@+id/mainBackground"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/meyer_img"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/mainBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainBackground"
+        app:layout_constraintStart_toStartOf="@+id/mainBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainBackground" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
