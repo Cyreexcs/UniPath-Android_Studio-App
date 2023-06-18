@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +92,11 @@ public class RatingScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SubmitScreen.class);
+                intent.putExtra("prof_id", prof_id);
+                intent.putExtra("prof_name", prof_name);
+                intent.putExtra("prof_img", prof_img);
+                intent.putExtra("subject_id", subject_id);
+                // student_id
                 startActivity(intent);
             }
         });
