@@ -54,4 +54,26 @@
         <item>1</item>
         <item>6</item>
     </string-array>
+
+    <string-array name="studentNames">
+        <item>Slim Ben Hamouda</item>
+        <item>Dhia Ben Massoud</item>
+        <item>Yarao Zabello</item>
+        <item>Mohamed loussaif</item>
+    </string-array>
+
+    <string-array name="feedback">
+        <item>this professor is really good, 5 stars for helpfulness</item>
+        <item>I had ITS with this professor.The exams were fine</item>
+        <item>could be better</item>
+        <item>hard exams but friendly</item>
+    </string-array>
+
+    <integer-array name="rating">
+        <item>5</item>
+        <item>5</item>
+        <item>2</item>
+        <item>4</item>
+    </integer-array>
+
 </resources>
