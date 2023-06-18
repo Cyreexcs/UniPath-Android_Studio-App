@@ -15,23 +15,43 @@
         android:text="press"
         app:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="@+id/mainBackground"
-        app:layout_constraintTop_toTopOf="@+id/image" />
+        app:layout_constraintTop_toTopOf="@+id/imagex" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="20dp"
-        android:id="@+id/mainBackground"
-        android:layout_marginTop="90dp"
-        android:layout_marginBottom="310dp"
+        android:layout_marginTop="84dp"
         android:backgroundTint="@color/grey"
         app:cardCornerRadius="25dp"
-        app:cardElevation="0dp">
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="70dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feedbackRecyclerView"
+                android:layout_width="383dp"
+                android:layout_height="194dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/helpfulnessStar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/helpfulnessStar" />
 
             <TextView
                 android:id="@+id/helpfulnessTxt"
@@ -56,7 +76,6 @@
                 android:textColor="@color/black"
                 android:textSize="22dp"
                 android:textStyle="bold"
-
                 app:layout_constraintStart_toStartOf="@+id/practicalLabTxt"
                 app:layout_constraintTop_toBottomOf="@+id/practicalLabTxt" />
 
@@ -88,19 +107,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <RatingBar
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="50dp"
+                android:id="@+id/lectureStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lectureStar"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="0dp"
+                android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
+                android:stepSize="1"
                 app:layout_constraintBottom_toBottomOf="@+id/lectureTxt"
                 app:layout_constraintStart_toEndOf="@+id/lectureTxt"
                 app:layout_constraintTop_toTopOf="@+id/lectureTxt"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:numStars="5"
-                android:stepSize="1">
+                tools:ignore="SpeakableTextPresentCheck">
 
             </RatingBar>
 
@@ -108,27 +127,27 @@
                 android:id="@+id/practicalLabStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="@+id/lectureStar"
                 app:layout_constraintStart_toStartOf="@+id/lectureStar"
                 app:layout_constraintTop_toBottomOf="@+id/lectureStar"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:numStars="5"
-                android:stepSize="1"/>
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <RatingBar
                 android:id="@+id/examsStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="@+id/practicalLabStar"
                 app:layout_constraintStart_toStartOf="@+id/practicalLabStar"
                 app:layout_constraintTop_toBottomOf="@+id/practicalLabStar"
                 tools:ignore="SpeakableTextPresentCheck"
-                android:numStars="5"
-                android:stepSize="1"
 
                 />
 
@@ -136,29 +155,28 @@
                 android:id="@+id/helpfulnessStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="@+id/examsStar"
                 app:layout_constraintStart_toStartOf="@+id/examsStar"
                 app:layout_constraintTop_toBottomOf="@+id/examsStar"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:numStars="5"
-                android:stepSize="1"
-                >
-            </RatingBar>
+                tools:ignore="SpeakableTextPresentCheck"></RatingBar>
 
             <TextView
                 android:id="@+id/nameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="90dp"
+                android:layout_marginTop="76dp"
                 android:fontFamily="sans-serif"
-                android:text="Dr. Benjamin Meyer"
+                android:text="D"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,7 +185,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="14dp"
                 android:fontFamily="sans-serif"
                 android:text="Ratings and Reviews"
                 android:textColor="@color/black"
@@ -175,7 +192,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/nameTxt"
                 app:layout_constraintStart_toStartOf="@+id/nameTxt"
-                app:layout_constraintTop_toBottomOf="@+id/nameTxt"/>
+                app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
 
 
             <RatingBar
@@ -183,12 +200,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
+                android:numStars="5"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:numStars="5"
                 app:layout_constraintTop_toBottomOf="@+id/ratingAndReview"
-                tools:ignore="SpeakableTextPresentCheck"/>
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -201,21 +221,24 @@
         android:id="@+id/rateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="80dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/lightblue"
         android:text="Rate"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainBackground"
-        app:layout_constraintEnd_toEndOf="@+id/mainBackground"
-        app:layout_constraintStart_toStartOf="@+id/mainBackground"
-        app:layout_constraintTop_toBottomOf="@+id/mainBackground"/>
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainBackground"
+        app:layout_constraintVertical_bias="1.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:id="@+id/imagex"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:foregroundGravity="center"
         android:src="@drawable/meyer_img"

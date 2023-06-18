@@ -25,11 +25,9 @@
             android:name=".LeaderBoardScreen"
             android:exported="false" />
         <activity
-            android:name=".ProfileScreen"
-            android:exported="false" />
-        <activity
             android:name=".HomeScreen"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
