@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder> {
+public class  FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Feedback>studentsFeedback;

@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,13 +26,17 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
 
     ArrayList<Professor> professors;
 
-    public PickProfAdapter(Context context ,ArrayList<Professor> professors){
+    String current_subject;
+
+    public PickProfAdapter(Context context, ArrayList<Professor> professors, String current_subject) {
+        this.context = context;
+        this.professors = professors;
+        this.current_subject = current_subject;
+    }
+
+    public PickProfAdapter(Context context , ArrayList<Professor> professors){
         this.context=context;
         this.professors=professors;
-
-        //should be deleted after taking a video
-        professors.get(0).setImage(R.drawable.meyer_img);
-        professors.get(1).setImage(R.drawable.wiedling_img);
     }
 
     @NonNull
@@ -49,7 +55,26 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
         holder.phone.setText((professors.get(position).getPhone()));
         //holder.rating.setText(Double.toString(professors.get(position).getRating()) ) ;
         holder.rating.setText(Double.toString(4));
-        holder.prof_img.setImageResource(professors.get(position).getImage());
+        // img uploaded directly from google
+
+        // if there is no image of the target then set the default one
+        if (professors.get(position).getUrl_img() == null)
+            holder.prof_img.setImageResource(R.drawable.default_profile_pic);
+        else {
+            Glide.with(context)
+                    .asBitmap()
+                    .load(professors.get(position).getUrl_img())
+                    .into(holder.prof_img);
+        }
+
+        holder.profCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.profCardView.getContext(), RatingScreen.class);
+                intent.putExtra("current_subject", current_subject);
+                holder.profCardView.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -62,6 +87,7 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView prof_img;
         TextView name , email, phone , rating;
+        CardView profCardView;
         public MyViewHolder(@NonNull View view) {
             super(view);
             prof_img = view.findViewById(R.id.photo_1);
@@ -71,8 +97,9 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
             rating = view.findViewById(R.id.score);
 
 
-            CardView profCardView = view.findViewById(R.id.profCardView);
+            profCardView = view.findViewById(R.id.profCardView);
 
+            /*
             profCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,6 +107,7 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
                     profCardView.getContext().startActivity(intent);
                 }
             });
+            */
 
         }
     }

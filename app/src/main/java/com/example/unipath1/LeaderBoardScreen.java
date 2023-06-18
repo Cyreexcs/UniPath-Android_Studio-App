@@ -19,8 +19,6 @@ public class LeaderBoardScreen extends AppCompatActivity {
 
         setLeaderBoard();
 
-        System.out.println(topProfs.get(1).getRating());
-
         RecyclerView top_profs_recycler = findViewById(R.id.top_profs_recycler);
 
         LeaderBoardAdapter myLeaderBoardAdapter = new LeaderBoardAdapter(topProfs);
