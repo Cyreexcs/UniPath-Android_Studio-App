@@ -1,5 +1,6 @@
 package com.example.unipath1;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,12 +31,14 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     Button nextBtn, preBtn;
+    TextView nameView;
     RecyclerView subjectRecyclerView;
     DataBaseHelper dataBaseHelper;
     subjectAdapter mySubAdapter;
 
     final int LAST_SEMESTER = 6, FIRST_SEMESTER = 1;
     int current_semester;
+    String current_student_id, student_name;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,6 +97,7 @@ public class HomeFragment extends Fragment {
     }
     CardView c1;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view,
                               Bundle savedInstanceState)
@@ -105,6 +110,13 @@ public class HomeFragment extends Fragment {
         // getting the subjectlist
         Intent intent = getActivity().getIntent();
         current_semester = intent.getIntExtra("semester_id", 1);
+        current_student_id = intent.getStringExtra("student_id");
+
+        student_name = dataBaseHelper.getStudentName(current_student_id);
+
+        nameView = view.findViewById(R.id.name_view);
+        nameView.setText("Hello " + student_name);
+
         mySubjects = dataBaseHelper.getSubjects(current_semester);
 
         // Assign subjectlist to ItemAdapter
@@ -118,7 +130,7 @@ public class HomeFragment extends Fragment {
         // adapter instance is set to the
         // recyclerview to inflate the items.
         subjectRecyclerView.setAdapter(mySubAdapter);
-        subjectRecyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
+        subjectRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         nextBtn = view.findViewById(R.id.nextBtn);
         preBtn = view.findViewById(R.id.previousBtn);

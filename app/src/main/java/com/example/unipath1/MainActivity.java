@@ -34,16 +34,17 @@ public class MainActivity extends AppCompatActivity {
                 _password  = password.getText().toString();
                 if (!_user .isEmpty() && !_password.isEmpty()) {
                     if (dataBaseHelper.checkUserData(_user, _password) != -1)
-                        openHomeScreen(dataBaseHelper.checkUserData(_user, _password));
+                        openHomeScreen(dataBaseHelper.checkUserData(_user, _password), _user);
                 }
             }
         });
 
 
     }
-    public void openHomeScreen(int semester_id) {
+    public void openHomeScreen(int semester_id, String _user) {
         Intent intent = new Intent(this, HomeScreen.class);
         intent.putExtra("semester_id", semester_id);
+        intent.putExtra("student_id", _user);
         startActivity(intent);
     }
 }

@@ -30,8 +30,8 @@ public class PickProfScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receiver_subject = intent.getStringExtra("clicked_subject");
         professors = dataBaseHelper.getProfessors(receiver_subject);
-        //PickProfAdapter adapter = new PickProfAdapter(this,professors);
-        PickProfAdapter adapter = new PickProfAdapter(this,professors, receiver_subject);
+
+        PickProfAdapter adapter = new PickProfAdapter(this, professors, receiver_subject);
         rec_view.setAdapter(adapter);
         rec_view.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -72,6 +72,10 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
             public void onClick(View v) {
                 Intent intent = new Intent(holder.profCardView.getContext(), RatingScreen.class);
                 intent.putExtra("current_subject", current_subject);
+                intent.putExtra("prof_id", professors.get(holder.getAdapterPosition()).getId());
+                intent.putExtra("prof_name", professors.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("prof_img", professors.get(holder.getAdapterPosition()).getUrl_img());
+                intent.putExtra("prof_rating", professors.get(holder.getAdapterPosition()).getRating());
                 holder.profCardView.getContext().startActivity(intent);
             }
         });

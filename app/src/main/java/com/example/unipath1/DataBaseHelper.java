@@ -14,48 +14,30 @@ import java.util.ArrayList;
 import kotlin.contracts.Returns;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
-    public static final String SUBJECT_TABLE = "SUBJECT_TABLE";
-    public static final String COLUMN_SUBJECT_NAME ="SUBJECT_NAME";
-    public static final String COLUMN_SEMESTER_ID = "SEMESTER_ID";
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "uniPath.db", null, 1);
+        super(context, "uniPathDB_1.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /*
-        String createTableStatement = "CREATE TABLE " + SUBJECT_TABLE + " (" + COLUMN_SUBJECT_NAME + " TEXT PRIMARY KEY, " + COLUMN_SEMESTER_ID + " INTEGER)";
-        db.execSQL(createTableStatement);
-        db.execSQL("CREATE TABLE PERSON (NAME TEXT PRIMARY KEY, AGE INT)");
-        */
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        /*
         db.execSQL("DROP TABLE IF EXISTS "+ SUBJECT_TABLE);
         db.execSQL("DROP TABLE IF EXISTS PROFESSORS_TABLE");
         db.execSQL("DROP TABLE IF EXISTS PERSON");
         onCreate(db);
+        */
     }
-
-
-    public boolean insertSubject(String subject, int semesterId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-
-        cv.put(COLUMN_SUBJECT_NAME, subject);
-        cv.put(COLUMN_SEMESTER_ID, semesterId);
-
-        long insert = db.insert(SUBJECT_TABLE, null, cv);
-        return insert != -1;
-    }
-
     public ArrayList<Subject> getSubjects(int semesterId) {
         ArrayList<Subject> returnList = new ArrayList<>();
 
         // get data from the database
-        String queryString = "SELECT * FROM " + SUBJECT_TABLE + " WHERE " + COLUMN_SEMESTER_ID + " = " + semesterId + " ;";
+        String queryString = "SELECT * FROM Subject WHERE semester_id = " + semesterId + " ;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
@@ -78,16 +60,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Professor(String name, String email, String phone, String url_img)
 
         // get data from the database
-        String queryString = "SELECT * FROM  PROFESSOR_TABLE WHERE PROF_SUBJECT = " + "'"+subject+"'" + " ;";
+        String queryString = "SELECT Professor.prof_id, prof_name, email, phone, image, rating FROM  Professor JOIN teaches ON Professor.prof_id = teaches.prof_id JOIN Subject ON teaches.subject_id = Subject.subject_id WHERE Subject.subject_name = " + "'"+subject+"'" + " ;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(0);
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
                 String email = cursor.getString(2);
                 String phone = cursor.getString(3);
                 String url_img = cursor.getString(4);
-                Professor prof = new Professor(name, email, phone, url_img);
+                double rating = cursor.getDouble(5);
+                Professor prof = new Professor(id, name, email, phone, url_img, rating);
                 returnList.add(prof);
             } while (cursor.moveToNext());
         }
@@ -98,13 +82,73 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public int checkUserData(String user, String password) {
-        String queryString = "SELECT * FROM STUDENT_TABLE WHERE MATRIKEL_NUM = " + "'"+user+"'" + " AND PASSWORD = " + "'"+password+"'" + " ;";
+    public int checkUserData(String student_id, String password) {
+        String queryString = "SELECT * FROM Student WHERE student_id = " + student_id + " AND password = " + "'"+password+"'" + " ;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst())
-            return cursor.getInt(2);
+            return cursor.getInt(3);
         return -1;
     }
 
+    public String getStudentName(String student_id) {
+        String queryString = "SELECT * FROM Student WHERE student_id = " + student_id + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        cursor.moveToFirst();
+        return cursor.getString(2);
+    }
+
+    public int getSubjectId(String subject_name) {
+        String queryString = "SELECT * FROM Subject WHERE subject_name = " + "'" + subject_name + "'" + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+
+    public ArrayList<Feedback> getFeedbacks(int prof_id, int subject_id) {
+        ArrayList<Feedback> returnList = new ArrayList<>();
+        String queryString = "SELECT * FROM Feedback WHERE prof_id = " + prof_id + " AND subject_id = " + subject_id + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()) {
+            do {
+                double lecture_rating = cursor.getDouble(4);
+                double lab_rating = cursor.getDouble(5);
+                double exam_rating = cursor.getDouble(6);
+                double help_rating = cursor.getDouble(7);
+                String opinion = cursor.getString(8);
+                Feedback feedback = new Feedback(opinion, lecture_rating, lab_rating, exam_rating, help_rating);
+                returnList.add(feedback);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public double[] getProfAvgRating(int prof_id, int subject_id) {
+        String queryString = "SELECT AVG(lecture_rating), AVG(lab_rating), AVG(exam_rating), AVG(helpfulness_rating) FROM Feedback WHERE prof_id = "+ prof_id +" AND subject_id = " + subject_id + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        cursor.moveToFirst();
+        double lecture_rating = cursor.getDouble(0);
+        double lab_rating = cursor.getDouble(1);
+        double exam_rating = cursor.getDouble(2);
+        double help_rating = cursor.getDouble(3);
+
+        cursor.close();
+        db.close();
+        return new double[]{lecture_rating, lab_rating, exam_rating, help_rating, (lecture_rating+lab_rating+exam_rating+help_rating)/4};
+    }
+
+    /*
+    for the profile screen
+    public Student getStudent(String student_id) {
+
+    }
+    */
 }

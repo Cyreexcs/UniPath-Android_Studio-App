@@ -21,10 +21,10 @@
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imagex"
+            app:layout_constraintEnd_toEndOf="@+id/prof_img"
             app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="@+id/imagex"
-            app:layout_constraintTop_toBottomOf="@+id/imagex">
+            app:layout_constraintStart_toStartOf="@+id/prof_img"
+            app:layout_constraintTop_toBottomOf="@+id/prof_img">
 
         </TextView>
 
@@ -189,7 +189,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/nationalityInput" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/name_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/age"
@@ -235,7 +235,7 @@
         </androidx.cardview.widget.CardView>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imagex"
+            android:id="@+id/prof_img"
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:layout_centerHorizontal="true"

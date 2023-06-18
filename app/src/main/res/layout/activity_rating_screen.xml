@@ -15,7 +15,7 @@
         android:text="press"
         app:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="@+id/mainBackground"
-        app:layout_constraintTop_toTopOf="@+id/imagex" />
+        app:layout_constraintTop_toTopOf="@+id/prof_img" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mainBackground"
@@ -49,9 +49,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/helpfulnessStar"
+                app:layout_constraintEnd_toEndOf="@+id/help_bar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helpfulnessStar" />
+                app:layout_constraintTop_toBottomOf="@+id/help_bar" />
 
             <TextView
                 android:id="@+id/helpfulnessTxt"
@@ -107,11 +107,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <RatingBar
-                android:id="@+id/lectureStar"
+                android:id="@+id/lecture_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="0dp"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
@@ -124,44 +124,46 @@
             </RatingBar>
 
             <RatingBar
-                android:id="@+id/practicalLabStar"
+                android:id="@+id/lab_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="@+id/lectureStar"
-                app:layout_constraintStart_toStartOf="@+id/lectureStar"
-                app:layout_constraintTop_toBottomOf="@+id/lectureStar"
+                app:layout_constraintEnd_toEndOf="@+id/lecture_bar"
+                app:layout_constraintStart_toStartOf="@+id/lecture_bar"
+                app:layout_constraintTop_toBottomOf="@+id/lecture_bar"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <RatingBar
-                android:id="@+id/examsStar"
+                android:id="@+id/exam_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="@+id/practicalLabStar"
-                app:layout_constraintStart_toStartOf="@+id/practicalLabStar"
-                app:layout_constraintTop_toBottomOf="@+id/practicalLabStar"
-                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintEnd_toEndOf="@+id/lab_bar"
+                app:layout_constraintStart_toStartOf="@+id/lab_bar"
+                app:layout_constraintTop_toBottomOf="@+id/lab_bar"
 
-                />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <RatingBar
-                android:id="@+id/helpfulnessStar"
+                android:id="@+id/help_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="@+id/examsStar"
-                app:layout_constraintStart_toStartOf="@+id/examsStar"
-                app:layout_constraintTop_toBottomOf="@+id/examsStar"
+                app:layout_constraintEnd_toEndOf="@+id/exam_bar"
+                app:layout_constraintStart_toStartOf="@+id/exam_bar"
+                app:layout_constraintTop_toBottomOf="@+id/exam_bar"
                 tools:ignore="SpeakableTextPresentCheck"></RatingBar>
 
             <TextView
@@ -200,6 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
@@ -236,7 +239,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imagex"
+        android:id="@+id/prof_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"

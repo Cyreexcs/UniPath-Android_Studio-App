@@ -26,12 +26,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif"
-                android:text="Slim Ben Hamouda"
+                android:text="Anonymous"
                 android:textColor="@color/lightblue"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
