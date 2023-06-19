@@ -14,9 +14,14 @@ import java.util.ArrayList;
 
 public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.MyViewHolder> {
     private ArrayList<Subject> subjects;
+    private int student_id ;
 
     public subjectAdapter(ArrayList<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
     }
 
     @NonNull
@@ -26,6 +31,7 @@ public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.MyViewHo
         return new subjectAdapter.MyViewHolder(view);
     }
 
+
     public void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
@@ -33,6 +39,17 @@ public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull subjectAdapter.MyViewHolder holder, int position) {
         holder.subBtn.setText(subjects.get(position).getName());
+        holder.subBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.clicked_subject = holder.subBtn.getText().toString();
+
+                Intent intent = new Intent(holder.subBtn.getContext(), PickProfScreen.class);
+                intent.putExtra("clicked_subject", holder.clicked_subject);
+                intent.putExtra("student_id",student_id);
+                holder.subBtn.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -48,8 +65,10 @@ public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.MyViewHo
             super(view);
 
             subBtn = view.findViewById(R.id.subBtn);
+            /*
             subBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
+
                 public void onClick(View v) {
                     clicked_subject = subBtn.getText().toString();
 
@@ -57,7 +76,10 @@ public class subjectAdapter extends RecyclerView.Adapter<subjectAdapter.MyViewHo
                     intent.putExtra("clicked_subject", clicked_subject);
                     subBtn.getContext().startActivity(intent);
                 }
-            });
+            })
+            */;
+
+
 
         }
     }

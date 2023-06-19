@@ -42,12 +42,12 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextText"
-                app:layout_constraintStart_toStartOf="@+id/editTextText"
+                app:layout_constraintEnd_toEndOf="@+id/opinion"
+                app:layout_constraintStart_toStartOf="@+id/opinion"
                 app:layout_constraintTop_toBottomOf="@+id/helpfulnessTxt" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/opinion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="Slim Ben Hamouda "
+            android:text="Abraham Lincoln "
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"

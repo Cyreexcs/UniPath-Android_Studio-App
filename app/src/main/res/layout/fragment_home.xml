@@ -97,8 +97,8 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="12dp"
-                app:cardBackgroundColor="#F5F5F7"
                 android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#F5F5F7"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -241,6 +241,23 @@
             android:layout_marginEnd="32dp"
             android:text="next"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+        <TextView
+            android:id="@+id/semester_id"
+            android:layout_width="66dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="58dp"
+            android:fontFamily="@font/arimo_bold"
+            android:gravity="center"
+            android:text="11"
+            android:textColor="#00a5ff"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="@+id/previousBtn"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
 public class  FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Feedback>studentsFeedback;
+    ArrayList<Feedback> feedbacks;
 
-    public FeedbackAdapter(Context context, ArrayList<Feedback> studentsFeedback) {
+    public FeedbackAdapter(Context context, ArrayList<Feedback> feedbacks) {
         this.context = context;
-        this.studentsFeedback = studentsFeedback;
+        this.feedbacks = feedbacks;
     }
 
 
@@ -34,16 +35,16 @@ public class  FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyVie
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.studentName.setText(studentsFeedback.get(position).getStudent_name());
-        holder.studentFeedback.setText(studentsFeedback.get(position).getOpinion());
-        System.out.println(studentsFeedback.get(position).getStudentRating());
-        holder.rating.setRating(studentsFeedback.get(position).getStudentRating());
+        holder.studentFeedback.setText(feedbacks.get(position).getOpinion());
+        holder.rating.setRating((float) feedbacks.get(position).getStudentRating());
+        Toast toast =Toast.makeText(context.getApplicationContext(), "st rating is : " + String.valueOf(feedbacks.get(position).getStudentRating()),Toast.LENGTH_LONG);
+        toast.show();
 
     }
 
     @Override
     public int getItemCount() {
-        return studentsFeedback.size();
+        return feedbacks.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

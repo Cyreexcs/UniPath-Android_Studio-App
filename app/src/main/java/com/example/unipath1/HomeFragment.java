@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
     RecyclerView subjectRecyclerView;
     DataBaseHelper dataBaseHelper;
     subjectAdapter mySubAdapter;
+
+    TextView semster_displaed ;
 
     final int LAST_SEMESTER = 6, FIRST_SEMESTER = 1;
     int current_semester;
@@ -59,9 +62,13 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment HomeFragment
+     *
+     * .
      */
     // TODO: Rename and change types and number of parameters
+
+
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -73,6 +80,7 @@ public class HomeFragment extends Fragment {
 
     ArrayList<Subject> mySubjects = new ArrayList<>();
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +88,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -121,12 +130,13 @@ public class HomeFragment extends Fragment {
 
         // Assign subjectlist to ItemAdapter
         mySubAdapter = new subjectAdapter(mySubjects);
-
+        mySubAdapter.setStudent_id(Integer.parseInt(current_student_id));
         // Set the LayoutManager that
         // this RecyclerView will use.
         subjectRecyclerView = view.findViewById(R.id.subjectsRv);
 
-
+        semster_displaed = view.findViewById(R.id.semester_id);
+        semster_displaed.setText(String.valueOf(current_semester));
         // adapter instance is set to the
         // recyclerview to inflate the items.
         subjectRecyclerView.setAdapter(mySubAdapter);
@@ -139,10 +149,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (current_semester < LAST_SEMESTER - 1) {
-                    current_semester++;
+                    int new_sem = current_semester++;
                     mySubjects = dataBaseHelper.getSubjects(current_semester);
                     subjectAdapter adapter = new subjectAdapter(mySubjects);
                     subjectRecyclerView.setAdapter(adapter);
+                    semster_displaed.setText(String.valueOf(new_sem+1));
                 }
             }
         });
@@ -151,21 +162,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (current_semester > FIRST_SEMESTER) {
-                    current_semester--;
+                    int new_sem = current_semester--;
+                    String i =String.valueOf(new_sem-1);
                     mySubjects = dataBaseHelper.getSubjects(current_semester);
                     subjectAdapter adapter = new subjectAdapter(mySubjects);
                     subjectRecyclerView.setAdapter(adapter);
+                    semster_displaed.setText(i);
                 }
             }
         });
 
 
+
+
     }
 
-    public void GoTo() {
-        Intent intent = new Intent(getActivity(), PickProfScreen.class);
-        startActivity(intent);
-    }
 
 }
 

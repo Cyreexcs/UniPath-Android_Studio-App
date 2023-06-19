@@ -28,6 +28,16 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
 
     String current_subject;
 
+    public int getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
+    }
+
+    int student_id;
+
     public PickProfAdapter(Context context, ArrayList<Professor> professors, String current_subject) {
         this.context = context;
         this.professors = professors;
@@ -76,6 +86,7 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
                 intent.putExtra("prof_name", professors.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("prof_img", professors.get(holder.getAdapterPosition()).getUrl_img());
                 intent.putExtra("prof_rating", professors.get(holder.getAdapterPosition()).getRating());
+                intent.putExtra("student_id",student_id);
                 holder.profCardView.getContext().startActivity(intent);
             }
         });

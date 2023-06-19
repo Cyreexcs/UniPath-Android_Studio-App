@@ -16,7 +16,7 @@ import kotlin.contracts.Returns;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "uniPathDB_1.db", null, 1);
+        super(context, "uniPath2_copy.db", null, 1);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public int checkUserData(String student_id, String password) {
-        String queryString = "SELECT * FROM Student WHERE student_id = " + student_id + " AND password = " + "'"+password+"'" + " ;";
+        String queryString = "SELECT * FROM Student WHERE student_id = " + "'"+ student_id + "'"+ " AND password = " + "'"+password+"'" + " ;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst())
@@ -114,11 +114,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
-                double lecture_rating = cursor.getDouble(4);
-                double lab_rating = cursor.getDouble(5);
-                double exam_rating = cursor.getDouble(6);
-                double help_rating = cursor.getDouble(7);
-                String opinion = cursor.getString(8);
+                double lecture_rating = cursor.getDouble(3);
+                double lab_rating = cursor.getDouble(4);
+                double exam_rating = cursor.getDouble(5);
+                double help_rating = cursor.getDouble(6);
+                String opinion = cursor.getString(7);
                 Feedback feedback = new Feedback(opinion, lecture_rating, lab_rating, exam_rating, help_rating);
                 returnList.add(feedback);
             } while (cursor.moveToNext());
@@ -144,7 +144,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return new double[]{lecture_rating, lab_rating, exam_rating, help_rating, (lecture_rating+lab_rating+exam_rating+help_rating)/4};
     }
+    public void update_or_add_feedback(String opinion, int student_id, int prof_id, int subject_id, double lecture_rating, double lab_rating, double exam_rating, double helpfulness_rating){
+        String queryString = "REPLACE INTO Feedback values ( " + student_id + " , "+ subject_id + " , "+ prof_id + " , "+ lecture_rating + " , "+lab_rating + " , "+ exam_rating + " , "+ helpfulness_rating + " , ' "+ opinion + " ' )" + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        cursor.moveToFirst();
+        cursor.close();
+        db.close();
+    }
+    public Student getStudent(int student_id){
+        String queryString = "SELECT * FROM Student WHERE student_id = " + student_id + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        Student student = new Student();
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(2);
+                String nationality = cursor.getString(5);
+                String address = cursor.getString(6);
+                int age = cursor.getInt(7);
+                String uni = cursor.getString(8);
+                String url_img = cursor.getString(4);
+                String deg = cursor.getString(9);
+                student = new Student(name,uni,deg,nationality,age,url_img,student_id,address);
+            }
+            while (cursor.moveToNext());
+        }
 
+        cursor.close();
+        db.close();
+        return student;
+    }
     /*
     for the profile screen
     public Student getStudent(String student_id) {

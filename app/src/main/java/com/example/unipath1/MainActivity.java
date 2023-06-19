@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
                 if (!_user .isEmpty() && !_password.isEmpty()) {
                     if (dataBaseHelper.checkUserData(_user, _password) != -1)
                         openHomeScreen(dataBaseHelper.checkUserData(_user, _password), _user);
+                    else {
+                        Toast toast = Toast.makeText(getApplicationContext(),"Username or Password Incorrect !" ,Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+
                 }
             }
         });
