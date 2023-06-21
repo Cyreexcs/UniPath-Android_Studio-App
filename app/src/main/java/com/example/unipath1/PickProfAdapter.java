@@ -23,25 +23,18 @@ import java.util.ArrayList;
 
 public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyViewHolder> {
     Context context;
+    static Intent intent;
 
     ArrayList<Professor> professors;
 
     String current_subject;
-
-    public int getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
-    }
-
     int student_id;
 
-    public PickProfAdapter(Context context, ArrayList<Professor> professors, String current_subject) {
+    public PickProfAdapter(Context context, ArrayList<Professor> professors, String current_subject, int student_id) {
         this.context = context;
         this.professors = professors;
         this.current_subject = current_subject;
+        this.student_id  = student_id;
     }
 
     public PickProfAdapter(Context context , ArrayList<Professor> professors){
@@ -80,16 +73,19 @@ public class PickProfAdapter extends RecyclerView.Adapter<PickProfAdapter.MyView
         holder.profCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.profCardView.getContext(), RatingScreen.class);
+                intent = new Intent(holder.profCardView.getContext(), RatingScreen.class);
                 intent.putExtra("current_subject", current_subject);
                 intent.putExtra("prof_id", professors.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("prof_name", professors.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("prof_img", professors.get(holder.getAdapterPosition()).getUrl_img());
                 intent.putExtra("prof_rating", professors.get(holder.getAdapterPosition()).getRating());
-                intent.putExtra("student_id",student_id);
+                intent.putExtra("student_id", student_id);
                 holder.profCardView.getContext().startActivity(intent);
             }
         });
+
+
+
 
     }
 

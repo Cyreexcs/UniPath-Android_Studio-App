@@ -20,6 +20,9 @@ import java.util.ArrayList;
  */
 public class LeaderBoardFragment extends Fragment {
 
+    DataBaseHelper dataBaseHelper;
+    LeaderBoardAdapter leaderBoardAdapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,38 +71,25 @@ public class LeaderBoardFragment extends Fragment {
     }
 
     ArrayList<Professor> topProfs = new ArrayList<>();
-
+    int TOP_LIMIT = 10;
     @Override
     public void onViewCreated(View view,
                               Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        // getting the employeelist
-        setLeaderBoard();
 
-        System.out.println(topProfs.get(1).getRating());
+        dataBaseHelper = new DataBaseHelper(getContext());
+        topProfs = dataBaseHelper.getTopProfessors(TOP_LIMIT);
 
-        // Assign employeelist to ItemAdapter
-        LeaderBoardAdapter itemAdapter = new LeaderBoardAdapter(topProfs);
 
-        // Set the LayoutManager that
-        // this RecyclerView will use.
+
+        leaderBoardAdapter = new LeaderBoardAdapter(this.getActivity(), topProfs);
+
+
         RecyclerView top_profs_recycler = view.findViewById(R.id.top_profs_recycler);
 
-
-        LeaderBoardAdapter myLeaderBoardAdapter = new LeaderBoardAdapter(topProfs);
-        top_profs_recycler.setAdapter(myLeaderBoardAdapter);
+        top_profs_recycler.setAdapter(leaderBoardAdapter);
         top_profs_recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
-    }
-
-    private void setLeaderBoard() {
-        int[] ranks = {R.drawable.gold_medal, R.drawable.gold_medal, R.drawable.gold_medal, R.drawable.silver_medal, R.drawable.silver_medal,R.drawable.silver_medal, R.drawable.bronze_medal, R.drawable.bronze_medal, R.drawable.bronze_medal, R.drawable.bronze_medal};
-        int[] prof_img = {R.drawable.baseline_account_circle_24};
-        String[] prof_names = getResources().getStringArray(R.array.prof_names);
-
-        for (int i = 0; i < 10; i++) {
-            topProfs.add(new Professor(prof_names[i], 4 , prof_img[0], ranks[i]));
-        }
     }
 
 }

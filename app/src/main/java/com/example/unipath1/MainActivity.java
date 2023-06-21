@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button loginBtn;
     private EditText user, password;
     DataBaseHelper dataBaseHelper;
+    int student_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +34,20 @@ public class MainActivity extends AppCompatActivity {
                 _user = user.getText().toString();
                 _password  = password.getText().toString();
                 if (!_user .isEmpty() && !_password.isEmpty()) {
-                    if (dataBaseHelper.checkUserData(_user, _password) != -1)
-                        openHomeScreen(dataBaseHelper.checkUserData(_user, _password), _user);
-                    else {
-                        Toast toast = Toast.makeText(getApplicationContext(),"Username or Password Incorrect !" ,Toast.LENGTH_LONG);
-                        toast.show();
+                    if (dataBaseHelper.checkUserData(_user, _password) != -1) {
+                        student_id = Integer.parseInt(_user);
+                        openHomeScreen(dataBaseHelper.checkUserData(_user, _password), student_id);
                     }
-
                 }
             }
         });
 
 
     }
-    public void openHomeScreen(int semester_id, String _user) {
+    public void openHomeScreen(int semester_id, int student_id) {
         Intent intent = new Intent(this, HomeScreen.class);
         intent.putExtra("semester_id", semester_id);
-        intent.putExtra("student_id", _user);
+        intent.putExtra("student_id", student_id);
         startActivity(intent);
     }
 }

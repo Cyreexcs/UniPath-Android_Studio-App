@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 public class RatingScreen extends AppCompatActivity {
 
-    Button rateBtn , returnButton ;
+    Button rateBtn;
     TextView prof_name_view;
     ImageView prof_img_view;
     RatingBar ratingBar, prof_lecture_rating_bar, prof_lab_rating_bar, prof_exam_rating_bar, prof_helpfulness_rating_bar;
 
     ArrayList<Feedback> feedbacks = new ArrayList<>();
-    int prof_id, subject_id , student_id;
+    int student_id, prof_id, subject_id;
     String prof_name, prof_img;
     double prof_rating, prof_lecture_rating, prof_lab_rating, prof_exam_rating, prof_helpfulness_rating;
 
@@ -35,7 +35,7 @@ public class RatingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_screen);
 
-        rateBtn = findViewById(R.id.rateBtn);
+        rateBtn = findViewById(R.id.submit_button);
         prof_name_view = findViewById(R.id.nameTxt);
         prof_img_view = findViewById(R.id.prof_img);
         ratingBar = findViewById(R.id.ratingBar);
@@ -50,10 +50,9 @@ public class RatingScreen extends AppCompatActivity {
         Intent intent = getIntent();
         subject_id = dataBaseHelper.getSubjectId(intent.getStringExtra("current_subject"));
         prof_id = intent.getIntExtra("prof_id", 20);
+        student_id = intent.getIntExtra("student_id", 10);
         prof_name = intent.getStringExtra("prof_name");
         prof_img = intent.getStringExtra("prof_img");
-        student_id = intent.getIntExtra("student_id",1);
-
         //prof_rating = intent.getDoubleExtra("prof_rating", 4);
 
         prof_name_view.setText("Prof.Dr " + prof_name);
@@ -86,10 +85,6 @@ public class RatingScreen extends AppCompatActivity {
         feedbackRecycleView.setAdapter(feedback_adapter);
         feedbackRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
-
-
         rateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,21 +93,9 @@ public class RatingScreen extends AppCompatActivity {
                 intent.putExtra("prof_name", prof_name);
                 intent.putExtra("prof_img", prof_img);
                 intent.putExtra("subject_id", subject_id);
-                intent.putExtra("student_id",student_id);
-                // student_id
+                intent.putExtra("student_id", student_id);
                 startActivity(intent);
             }
         });
-
-
-        returnButton=findViewById(R.id.returnButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
-
 }

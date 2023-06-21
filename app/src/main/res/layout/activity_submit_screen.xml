@@ -128,8 +128,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="0dp"
                 android:numStars="5"
+                android:rating="0"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
@@ -143,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
+                android:rating="0"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
@@ -156,6 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
+                android:rating="0"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
@@ -169,6 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
+                android:rating="0"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
                 android:stepSize="1"
@@ -196,7 +199,7 @@
 
 
     <Button
-        android:id="@+id/rateBtn"
+        android:id="@+id/submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

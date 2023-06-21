@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -19,12 +18,7 @@ public class PickProfScreen extends AppCompatActivity {
     DataBaseHelper dataBaseHelper;
 
     String receiver_subject;
-    Button returnButton;
     int student_id;
-
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +30,12 @@ public class PickProfScreen extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(this);
         Intent intent = getIntent();
         receiver_subject = intent.getStringExtra("clicked_subject");
-        student_id =intent.getIntExtra("student_id",1);
-
+        student_id = intent.getIntExtra("student_id", 10);
         professors = dataBaseHelper.getProfessors(receiver_subject);
 
-        PickProfAdapter adapter = new PickProfAdapter(this, professors, receiver_subject);
-        adapter.setStudent_id(student_id);
+        PickProfAdapter adapter = new PickProfAdapter(this, professors, receiver_subject, student_id);
         rec_view.setAdapter(adapter);
         rec_view.setLayoutManager(new LinearLayoutManager(this));
-        returnButton =findViewById(R.id.returnButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void setProfessor(){

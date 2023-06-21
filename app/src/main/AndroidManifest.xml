@@ -24,9 +24,6 @@
             android:name=".SubmitScreen"
             android:exported="false" />
         <activity
-            android:name=".LeaderBoardScreen"
-            android:exported="false" />
-        <activity
             android:name=".HomeScreen"
             android:exported="false" />
 

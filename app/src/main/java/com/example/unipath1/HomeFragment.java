@@ -2,25 +2,19 @@ package com.example.unipath1;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,11 +31,10 @@ public class HomeFragment extends Fragment {
     DataBaseHelper dataBaseHelper;
     subjectAdapter mySubAdapter;
 
-    TextView semster_displaed ;
-
     final int LAST_SEMESTER = 6, FIRST_SEMESTER = 1;
     int current_semester;
-    String current_student_id, student_name;
+    int student_id;
+    String student_name;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,13 +55,9 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment
-     *
-     * .
+     * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-
-
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -80,7 +69,6 @@ public class HomeFragment extends Fragment {
 
     ArrayList<Subject> mySubjects = new ArrayList<>();
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +76,6 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -119,9 +106,9 @@ public class HomeFragment extends Fragment {
         // getting the subjectlist
         Intent intent = getActivity().getIntent();
         current_semester = intent.getIntExtra("semester_id", 1);
-        current_student_id = intent.getStringExtra("student_id");
+        student_id = intent.getIntExtra("student_id", 10);
 
-        student_name = dataBaseHelper.getStudentName(current_student_id);
+        student_name = dataBaseHelper.getStudentName(student_id);
 
         nameView = view.findViewById(R.id.name_view);
         nameView.setText("Hello " + student_name);
@@ -129,14 +116,13 @@ public class HomeFragment extends Fragment {
         mySubjects = dataBaseHelper.getSubjects(current_semester);
 
         // Assign subjectlist to ItemAdapter
-        mySubAdapter = new subjectAdapter(mySubjects);
-        mySubAdapter.setStudent_id(Integer.parseInt(current_student_id));
+        mySubAdapter = new subjectAdapter(mySubjects, student_id);
+
         // Set the LayoutManager that
         // this RecyclerView will use.
         subjectRecyclerView = view.findViewById(R.id.subjectsRv);
 
-        semster_displaed = view.findViewById(R.id.semester_id);
-        semster_displaed.setText(String.valueOf(current_semester));
+
         // adapter instance is set to the
         // recyclerview to inflate the items.
         subjectRecyclerView.setAdapter(mySubAdapter);
@@ -149,11 +135,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (current_semester < LAST_SEMESTER - 1) {
-                    int new_sem = current_semester++;
+                    current_semester++;
                     mySubjects = dataBaseHelper.getSubjects(current_semester);
-                    subjectAdapter adapter = new subjectAdapter(mySubjects);
+                    subjectAdapter adapter = new subjectAdapter(mySubjects, student_id);
                     subjectRecyclerView.setAdapter(adapter);
-                    semster_displaed.setText(String.valueOf(new_sem+1));
                 }
             }
         });
@@ -162,21 +147,20 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (current_semester > FIRST_SEMESTER) {
-                    int new_sem = current_semester--;
-                    String i =String.valueOf(new_sem-1);
+                    current_semester--;
                     mySubjects = dataBaseHelper.getSubjects(current_semester);
-                    subjectAdapter adapter = new subjectAdapter(mySubjects);
+                    subjectAdapter adapter = new subjectAdapter(mySubjects, student_id);
                     subjectRecyclerView.setAdapter(adapter);
-                    semster_displaed.setText(i);
                 }
             }
         });
 
-
-
-
     }
 
+    public void GoTo() {
+        Intent intent = new Intent(getActivity(), PickProfScreen.class);
+        startActivity(intent);
+    }
 
 }
 
