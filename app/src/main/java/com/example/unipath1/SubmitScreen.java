@@ -69,7 +69,7 @@ public class SubmitScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkFeedback()) {
-                    Feedback feedback = new Feedback(student_id, subject_id, prof_id, prof_lecture_rating, prof_lab_rating, prof_exam_rating, prof_helpfulness_rating, opinion);
+                    Feedback feedback = new Feedback(student_id, prof_id, subject_id, prof_lecture_rating, prof_lab_rating, prof_exam_rating, prof_helpfulness_rating, opinion);
                     dataBaseHelper.submitFeedback(feedback);
                     //before i can uncomment this i should overwrite all onBackPressed() functions
                     //startActivity(PickProfAdapter.intent);

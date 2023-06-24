@@ -159,9 +159,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(queryString);
 
-        String updateQuery = "UPDATE Professor SET rating = " + updateProfRating(feedback, feedback_id) + " WHERE prof_id = " + feedback.getProf_id() + ";";
-        db.execSQL(updateQuery);
-
         db.close();
     }
 
@@ -196,7 +193,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
-        db.close();
         _db.close();
     }
 
@@ -204,16 +200,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String queryString = "SELECT rating FROM Professor WHERE prof_id = " + feedback.getProf_id() + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
+        cursor.moveToFirst();
         double rating = cursor.getDouble(0);
+        cursor.close();
 
         // feedback counts
         String queryString2 = "SELECT count(feedback_id) FROM Feedback WHERE prof_id = " + feedback.getProf_id() + ";";
         cursor = db.rawQuery(queryString2, null);
+        cursor.moveToFirst();
         int n = cursor.getInt(0);
-
+        cursor.close();
         // old avg rating
         String queryString3 = "SELECT AVG(lecture_rating), AVG(lab_rating), AVG(exam_rating), AVG(helpfulness_rating) FROM Feedback WHERE feedback_id = "+ feedback_id + ";";
         cursor = db.rawQuery(queryString3, null);
+        cursor.moveToFirst();
         double lecture_rating = cursor.getDouble(0);
         double lab_rating = cursor.getDouble(1);
         double exam_rating = cursor.getDouble(2);
@@ -228,6 +228,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
+
+        SQLiteDatabase _db = this.getWritableDatabase();
+
+        String updateQuery = "UPDATE Professor SET rating = " + updateProfRating(feedback, feedback_id) + " WHERE prof_id = " + feedback.getProf_id() + ";";
+        _db.execSQL(updateQuery);
         return rating;
     }
 
