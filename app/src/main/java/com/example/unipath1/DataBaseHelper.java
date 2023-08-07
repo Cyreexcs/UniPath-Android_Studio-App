@@ -159,6 +159,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(queryString);
 
+        updateProfRating(feedback, feedback_id);
+
         db.close();
     }
 
@@ -192,11 +194,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+
+
         cursor.close();
         _db.close();
     }
 
-    private double updateProfRating(Feedback feedback, int feedback_id) {
+    private void updateProfRating(Feedback feedback, int feedback_id) {
+        // it make no sense for the moment
+        // to make sense the avg rating should be stored somewhere and then we can just update it without looping the db
+
         String queryString = "SELECT rating FROM Professor WHERE prof_id = " + feedback.getProf_id() + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
@@ -204,13 +211,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         double rating = cursor.getDouble(0);
         cursor.close();
 
+        /*
         // feedback counts
         String queryString2 = "SELECT count(feedback_id) FROM Feedback WHERE prof_id = " + feedback.getProf_id() + ";";
         cursor = db.rawQuery(queryString2, null);
         cursor.moveToFirst();
         int n = cursor.getInt(0);
         cursor.close();
-        // old avg rating
+        */
+
+        // avg rating
         String queryString3 = "SELECT AVG(lecture_rating), AVG(lab_rating), AVG(exam_rating), AVG(helpfulness_rating) FROM Feedback WHERE feedback_id = "+ feedback_id + ";";
         cursor = db.rawQuery(queryString3, null);
         cursor.moveToFirst();
@@ -220,20 +230,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         double help_rating = cursor.getDouble(3);
         double _rating = (lecture_rating+lab_rating+exam_rating+help_rating)/4;
 
+        /*
         if (feedback_id != -1) {
             rating += (rating - _rating) / (n - 1);
         }
         rating += (feedback.getRating() - rating) / (n+1);
-
+        */
 
         cursor.close();
         db.close();
 
         SQLiteDatabase _db = this.getWritableDatabase();
 
-        String updateQuery = "UPDATE Professor SET rating = " + updateProfRating(feedback, feedback_id) + " WHERE prof_id = " + feedback.getProf_id() + ";";
+        String updateQuery = "UPDATE Professor SET rating = " + _rating + " WHERE prof_id = " + feedback.getProf_id() + ";";
         _db.execSQL(updateQuery);
-        return rating;
     }
 
     public ArrayList<Professor> getTopProfessors(int n) {
@@ -260,6 +270,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return returnList;
+    }
+
+    public boolean is_ratable(int student_id, int prof_id, int subject_id){
+        String queryString = "SELECT * FROM studies where subject_id  = " +subject_id + " and prof_id = " +prof_id + " and student_id = " + student_id + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        boolean ok = cursor.moveToFirst();
+        System.out.println(ok);
+        return ok;
     }
 
     /*

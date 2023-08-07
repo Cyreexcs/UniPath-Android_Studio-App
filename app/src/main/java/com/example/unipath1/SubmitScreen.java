@@ -72,8 +72,7 @@ public class SubmitScreen extends AppCompatActivity {
                     Feedback feedback = new Feedback(student_id, prof_id, subject_id, prof_lecture_rating, prof_lab_rating, prof_exam_rating, prof_helpfulness_rating, opinion);
                     dataBaseHelper.submitFeedback(feedback);
                     //before i can uncomment this i should overwrite all onBackPressed() functions
-                    //startActivity(PickProfAdapter.intent);
-                    finish();
+                    startActivity(PickProfAdapter.intent);
                 }
                 else
                     Toast.makeText(SubmitScreen.this, "invalid feedback", Toast.LENGTH_SHORT).show();
@@ -91,4 +90,11 @@ public class SubmitScreen extends AppCompatActivity {
         opinion = opinionTxt.getText().toString();
         return prof_lecture_rating >= 1 && prof_lab_rating >= 1 && prof_exam_rating >= 1 && prof_helpfulness_rating >= 1;
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        startActivity(PickProfAdapter.intent);
+    }
 }
+

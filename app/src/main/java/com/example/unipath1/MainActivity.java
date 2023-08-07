@@ -50,4 +50,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("student_id", student_id);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

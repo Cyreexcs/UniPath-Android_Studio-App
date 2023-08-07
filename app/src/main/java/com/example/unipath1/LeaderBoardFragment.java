@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class LeaderBoardFragment extends Fragment {
 
     DataBaseHelper dataBaseHelper;
-    LeaderBoardAdapter leaderBoardAdapter;
+    //LeaderBoardAdapter leaderBoardAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +83,7 @@ public class LeaderBoardFragment extends Fragment {
 
 
 
-        leaderBoardAdapter = new LeaderBoardAdapter(this.getActivity(), topProfs);
+        LeaderBoardAdapter leaderBoardAdapter = new LeaderBoardAdapter(this.getActivity(), topProfs);
 
 
         RecyclerView top_profs_recycler = view.findViewById(R.id.top_profs_recycler);

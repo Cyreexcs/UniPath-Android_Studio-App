@@ -18,11 +18,13 @@ public class HomeScreen extends AppCompatActivity {
 
     //ArrayList<Subject> mySubjects = new ArrayList<>();
     ActivityHomeScreenBinding binding;
+    static Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        intent = getIntent();
 
         binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -54,6 +56,9 @@ public class HomeScreen extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -88,14 +89,25 @@ public class RatingScreen extends AppCompatActivity {
         rateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SubmitScreen.class);
-                intent.putExtra("prof_id", prof_id);
-                intent.putExtra("prof_name", prof_name);
-                intent.putExtra("prof_img", prof_img);
-                intent.putExtra("subject_id", subject_id);
-                intent.putExtra("student_id", student_id);
-                startActivity(intent);
+                boolean ok = dataBaseHelper.is_ratable(student_id, prof_id, subject_id);
+                if (!ok) {
+                    Toast.makeText(RatingScreen.this, "ok = " + ok, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(v.getContext(), SubmitScreen.class);
+                    intent.putExtra("prof_id", prof_id);
+                    intent.putExtra("prof_name", prof_name);
+                    intent.putExtra("prof_img", prof_img);
+                    intent.putExtra("subject_id", subject_id);
+                    intent.putExtra("student_id", student_id);
+                    startActivity(intent);
+                }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(PickProfScreen.intent);
     }
 }

@@ -14,9 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,16 +31,22 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
 
-    Button nextBtn, preBtn;
     TextView nameView;
     RecyclerView subjectRecyclerView;
     DataBaseHelper dataBaseHelper;
     subjectAdapter mySubAdapter;
 
+    static Intent intent;
     final int LAST_SEMESTER = 6, FIRST_SEMESTER = 1;
     int current_semester;
     int student_id;
     String student_name;
+
+    //chips
+
+    Chip semester_1_chip, semester_2_chip, semester_3_chip, semester_4_chip, semester_5_chip;
+
+    ChipGroup chipGroup;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,15 +108,14 @@ public class HomeFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view,
-                              Bundle savedInstanceState)
-    {
+                              Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         // database
         dataBaseHelper = new DataBaseHelper(this.getContext());
 
         // getting the subjectlist
-        Intent intent = getActivity().getIntent();
+        intent = getActivity().getIntent();
         current_semester = intent.getIntExtra("semester_id", 1);
         student_id = intent.getIntExtra("student_id", 10);
 
@@ -128,38 +139,35 @@ public class HomeFragment extends Fragment {
         subjectRecyclerView.setAdapter(mySubAdapter);
         subjectRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        nextBtn = view.findViewById(R.id.nextBtn);
-        preBtn = view.findViewById(R.id.previousBtn);
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        semester_1_chip = view.findViewById(R.id.semester_1);
+        semester_2_chip = view.findViewById(R.id.semester_2);
+        semester_3_chip = view.findViewById(R.id.semester_3);
+        semester_4_chip = view.findViewById(R.id.semester_4);
+        semester_5_chip = view.findViewById(R.id.semester_5);
+
+        chipGroup = view.findViewById(R.id.chipGroup);
+
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (current_semester < LAST_SEMESTER - 1) {
-                    current_semester++;
-                    mySubjects = dataBaseHelper.getSubjects(current_semester);
-                    subjectAdapter adapter = new subjectAdapter(mySubjects, student_id);
-                    subjectRecyclerView.setAdapter(adapter);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    int selectedChip = Integer.parseInt(buttonView.getText().toString());
+                    Toast.makeText(getContext(), "selectedChip", Toast.LENGTH_SHORT).show();
+                    subjectAdapter newSubjectAdapter;
+                    mySubjects = dataBaseHelper.getSubjects(selectedChip);
+                    newSubjectAdapter = new subjectAdapter(mySubjects, student_id);
+                    subjectRecyclerView.setAdapter(newSubjectAdapter);
                 }
             }
-        });
+        };
 
-        preBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (current_semester > FIRST_SEMESTER) {
-                    current_semester--;
-                    mySubjects = dataBaseHelper.getSubjects(current_semester);
-                    subjectAdapter adapter = new subjectAdapter(mySubjects, student_id);
-                    subjectRecyclerView.setAdapter(adapter);
-                }
-            }
-        });
+        semester_1_chip.setOnCheckedChangeListener(checkedChangeListener);
+        semester_2_chip.setOnCheckedChangeListener(checkedChangeListener);
+        semester_3_chip.setOnCheckedChangeListener(checkedChangeListener);
+        semester_4_chip.setOnCheckedChangeListener(checkedChangeListener);
+        semester_5_chip.setOnCheckedChangeListener(checkedChangeListener);
 
-    }
-
-    public void GoTo() {
-        Intent intent = new Intent(getActivity(), PickProfScreen.class);
-        startActivity(intent);
     }
 
 }

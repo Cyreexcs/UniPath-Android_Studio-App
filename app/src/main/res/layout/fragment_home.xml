@@ -220,45 +220,65 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/previousBtn"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
-        <Button
-            android:id="@+id/previousBtn"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="previous"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
-
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="next"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
-        <TextView
-            android:id="@+id/semester_id"
-            android:layout_width="66dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="58dp"
-            android:fontFamily="@font/arimo_bold"
-            android:gravity="center"
-            android:text="11"
-            android:textColor="#00a5ff"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toStartOf="@+id/nextBtn"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="@+id/previousBtn"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/semester_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="1"
+                android:textColor="#00A5FF"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="#F5F5F7" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/semester_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="2"
+                android:textColor="#00A5FF"
+                app:chipBackgroundColor="#F5F5F7" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/semester_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="3"
+                android:textColor="#00A5FF"
+                app:chipBackgroundColor="#F5F5F7" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/semester_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="4"
+                android:textColor="#00A5FF"
+                app:chipBackgroundColor="#F5F5F7" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/semester_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="5"
+                android:textColor="#00A5FF"
+                app:chipBackgroundColor="#F5F5F7" />
+        </com.google.android.material.chip.ChipGroup>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

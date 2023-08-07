@@ -19,6 +19,7 @@ public class PickProfScreen extends AppCompatActivity {
 
     String receiver_subject;
     int student_id;
+    static Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class PickProfScreen extends AppCompatActivity {
         RecyclerView rec_view =findViewById(R.id.my_rec_view);
 
         dataBaseHelper = new DataBaseHelper(this);
-        Intent intent = getIntent();
+        intent = getIntent();
         receiver_subject = intent.getStringExtra("clicked_subject");
         student_id = intent.getIntExtra("student_id", 10);
         professors = dataBaseHelper.getProfessors(receiver_subject);
@@ -50,4 +51,8 @@ public class PickProfScreen extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(HomeFragment.intent);
+    }
 }
