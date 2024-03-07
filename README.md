@@ -23,7 +23,7 @@ If the database doesn't work or you encouter any issues, make sure to change it 
 
 ## Video Demo
 
-A video demonstration of the app can be found [here](https://github.com/Cyreexcs/UniPath-Android_Studio-App/assets/70235827/52f68347-9aae-440a-88db-1806b2dd6a5a).
+A video demonstration of the app can be found [here](https://github.com/Cyreexcs/UniPath-Android_Studio-App/assets/70235827/c1304226-79c6-4b2f-9d19-d17e56c94b5f).
 
 ## Testing Login Credentials
 
