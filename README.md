@@ -10,7 +10,7 @@ The app facilitates seamless navigation between semesters, allowing users to exp
 
 To further enhance user engagement, the app features a leaderboard highlighting professors with the highest average ratings and feedback. This leaderboard serves as a valuable resource for students seeking guidance on selecting courses and instructors.
 
-In essence, UniPath streamlines the academic journey by empowering students to make informed decisions through personalized course listings, insightful feedback, and a transparent rating system.
+In essence, UniPath streamlines the academic journey by empowering students to make informed decisions through personalized course listings, insightful feedback, and a transparent rating system
 
 ## Technologies Used
 
@@ -24,6 +24,8 @@ If the database doesn't work or you encouter any issues, make sure to change it 
 ## Video Demo
 
 A video demonstration of the app can be found [here](https://github.com/Cyreexcs/UniPath-Android_Studio-App/assets/70235827/c1304226-79c6-4b2f-9d19-d17e56c94b5f).
+
+Be aware that the current version of the application might differ slightly from the introductory video. The video showcases the latest version, whereas the code pushed to the repository corresponds to an earlier version. We are in the process of addressing minor issues and improving compatibility with the video demonstration.
 
 ## Testing Login Credentials
 
