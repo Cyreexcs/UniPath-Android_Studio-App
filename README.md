@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This application was developed as a group project at Hochschule Darmstadt for the Human-Computer Interaction Course. 
+This application was developed as a group project at Hochschule Darmstadt for the Human-Computer Interaction Course. "The project saw active participation from three students, with contributions spanning across five distinct accounts hence why the different commits".
 
 The UniPath Android Studio App simplifies the student experience by providing easy access to course information, professor ratings, and feedback. Upon logging in with their immatriculation number and password, users are greeted with a personalized page displaying subjects from the current semester. For instance, first-semester students will see courses tailored to their academic level, while those in higher semesters will have a different set of courses.
 
